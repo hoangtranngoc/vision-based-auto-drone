@@ -34,64 +34,6 @@ def convertCoordFromUE4toNED(ue4Point, startPoint):
   
     return Location(x,y,z, ue4Point.yaw)
 
-
-# def getNewPointToCapturePicture(toPoint, yaw, direction, pos, velocity, extra_high = 0):
-#     #get direction vector and calculate cos, sin of the angle between the direction vector and Oy
-#     angle = yaw
-#     cosA = math.cos(angle*math.pi/180.0)
-#     sinA = math.sin(angle*math.pi/180.0)
-    
-#     x = toPoint.x
-#     y = toPoint.y
-#     z = toPoint.z
-    
-#     # TODO clean up below if, else
-#     x0,y0 = (0,0)
-#     if (pos == SOUTH_EAST_POS):
-#         x0,y0 = (-INSPECTION_X, INSPECTION_Y)
-#     elif (pos == NORTH_EAST_POS):
-#         x0,y0 = (INSPECTION_X, INSPECTION_Y)
-#     elif (pos == NORTH_WEST_POS):
-#         x0,y0 = (INSPECTION_X, -INSPECTION_Y)
-#     elif (pos == SOUTH_WEST_POS):
-#         x0,y0 = (-INSPECTION_X, -INSPECTION_Y)
-#     elif (pos == NORTH_POS):
-#         x0 = INSPECTION_X
-#     elif (pos == SOUTH_POS):
-#         x0 = -INSPECTION_X
-
-#     X = x0*cosA - y0*sinA
-#     Y = y0*cosA + x0*sinA
-#     x_expected = x + X
-#     y_expected = y + Y
-#     z_expected = z-INSPECTION_Z - extra_high
-#     expectedLoc = Vector3r(x_expected, y_expected, z_expected)
-#     print('expectedLoc', expectedLoc)
-
-#     # this is because the velocity affect to the location
-#     stop_distance = 0.03
-#     if (velocity == NAVIGATION_SPEED):
-#         stop_distance = 1
-    
-#     if (direction == NORTH_SOUTH_DRT):
-#         x0 = x0 + stop_distance
-#     elif (direction == SOUTH_NORTH_DRT):
-#         x0 = x0 - stop_distance
-#     elif (direction == EAST_WEST_DRT):
-#         y0 = y0 + stop_distance
-#     elif (direction == WEST_EAST_DRT):
-#         y0 = y0 - stop_distance
-    
-    
-#     X = x0*cosA - y0*sinA
-#     Y = y0*cosA + x0*sinA
-#     x_stop = x + X
-#     y_stop = y + Y
-#     z_stop = z-INSPECTION_Z - extra_high
-#     stopLoc = Vector3r(x_stop, y_stop, z_stop)
-    
-#     return expectedLoc, stopLoc
-
 def getNewPointToCapturePicture1(toPoint, currentPoint, pos, velocity, extra_high = 0, extra_width=0):
     #get direction vector and calculate cos, sin of the angle between the direction vector and Oy
     angle = toPoint.yaw
@@ -175,20 +117,6 @@ def calAngleBetween2Locs(curLoc, nextLoc):
     degree = rad*180.0/math.pi
     
     return degree
-
-
-# def calAngleOfMastShouldBeByDroneYaw(drone_yaw):
-#     angle = 0
-#     if drone_yaw > 0:
-#         if drone_yaw < 90:
-#             return (drone_yaw - 90)
-#         else:
-#             return (drone_yaw - 270 )
-#     else:
-#         if drone_yaw > -90:
-#             return (-90 + drone_yaw)
-#         else:
-#             return (90 + drone_yaw)
         
         
 def moveToPosition(client, toPoint, yaw=0, pos=0, velocity=INSPECTION_SPEED, extra_high=0, extra_width=0):   

@@ -1,0 +1,21 @@
+PIPELINE_CONFIG_PATH={path to pipeline config file}
+MODEL_DIR={path to model directory}
+NUM_TRAIN_STEPS=50000
+SAMPLE_1_OF_N_EVAL_EXAMPLES=1
+python object_detection/model_main.py \
+    --pipeline_config_path=${PIPELINE_CONFIG_PATH} \
+    --model_dir=${MODEL_DIR} \
+    --num_train_steps=${NUM_TRAIN_STEPS} \
+    --sample_1_of_n_eval_examples=$SAMPLE_1_OF_N_EVAL_EXAMPLES \
+    --alsologtostderr
+    
+    
+
+#training with 100 steps (sanity check)
+python object_detection/model_main.py --pipeline_config_path="C:\Users\hoang\WorkingSpace\TrainingModels\object_detection\ssd_mobilenet_v2.config" --model_dir="C:\Users\hoang\WorkingSpace\TrainingModels\object_detection\tmp" --num_train_steps=100 --alsologtostderr
+
+#training with 50000 steps
+python object_detection/model_main.py --pipeline_config_path="C:\Users\hoang\WorkingSpace\TrainingModels\object_detection\ssd_mobilenet_v2.config" --model_dir="C:\Users\hoang\WorkingSpace\TrainingModels\object_detection\checkpoints" --num_train_steps=50000 --alsologtostderr
+
+#export model
+python object_detection/export_inference_graph.py --input_type="image_tensor" --pipeline_config_path="C:\Users\hoang\WorkingSpace\TrainingModels\object_detection\ssd_mobilenet_v2.config" --trained_checkpoint_prefix="C:\Users\hoang\WorkingSpace\TrainingModels\object_detection\checkpoints\model.ckpt-50000" --output_directory="C:\Users\hoang\WorkingSpace\TrainingModels\object_detection\models"
